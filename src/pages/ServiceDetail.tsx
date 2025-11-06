@@ -116,13 +116,21 @@ const ServiceDetail = () => {
                 <CardContent className="p-6">
                   <h2 className="text-2xl font-bold mb-6">How It Works</h2>
                   <div className="space-y-6">
-                    {processSteps.map((step: any, index: number) => (
+                    {processSteps.map((step: any) => (
                       <div key={step.detail_id} className="flex gap-4">
+                         {
+                          step.detail_text && (
+                            <>                          
                         <div className="flex-shrink-0">
                           <div className="w-10 h-10 rounded-full gradient-hero flex items-center justify-center text-white font-bold">
-                            {index + 1}
+                            {step?.seq_no}
                           </div>
                         </div>
+                            
+                            </>
+                          )
+                         }
+
                         <div className="flex-1 pt-1">
                           <div
                             dangerouslySetInnerHTML={{ __html: step.detail_text }}

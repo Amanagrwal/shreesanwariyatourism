@@ -50,7 +50,6 @@ const BlogPost: React.FC = () => {
     return data.data;
   };
 
-  // ✅ useQuery for caching & refetch
   const {
     data: post,
     isLoading,

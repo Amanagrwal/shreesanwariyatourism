@@ -20,7 +20,7 @@ const PackageDetail = () => {
   const [pkg, setPkg] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const {contactData} = useGlobalContext();
+  const { contactData } = useGlobalContext();
   const currencySymbols: Record<string, string> = {
     INR: '₹',
     USD: '$',
@@ -91,7 +91,7 @@ const PackageDetail = () => {
         title={pkg?.tour_title}
         description={`Book ${pkg?.tour_title} - ${pkg?.duration}. Best prices guaranteed.`}
         keywords={`${pkg.city?.city_titile} tour, ${pkg?.tour_title}, UAE packages, ${pkg.city?.city_titile}`}
-         canonical={`${BASE_URL}/packages/${pkg.slug}`}
+        canonical={`${BASE_URL}/packages/${pkg.slug}`}
         url={`${BASE_URL}/packages/${pkg.slug}`}
       />
 
@@ -125,13 +125,13 @@ const PackageDetail = () => {
                 <p className="text-sm text-muted-foreground mb-1">Starting from</p>
                 {
                   pkg?.price && (
-                <p className="text-2xl font-bold text-primary">
-                  {getCurrencySymbol(pkg?.currency)} {pkg?.price}
-                </p>
+                    <p className="text-2xl font-bold text-primary">
+                      {getCurrencySymbol(pkg?.currency)} {pkg?.price}
+                    </p>
 
                   )
                 }
-                
+
                 <p className="text-xs text-muted-foreground">
                   {pkg?.on_basis}
                 </p>
@@ -165,7 +165,7 @@ const PackageDetail = () => {
                 <CardContent className="p-6">
                   <h2 className="text-2xl font-bold mb-6">Day-by-Day Itinerary</h2>
                   <div className="space-y-6">
-                    {pkg.itineraries.map((day: any , index: number) => (
+                    {pkg.itineraries.map((day: any, index: number) => (
                       <div key={index} className="flex gap-4">
                         <div className="flex-shrink-0">
                           <div className="w-12 h-12 rounded-full gradient-hero flex items-center justify-center text-white font-bold">
@@ -174,7 +174,10 @@ const PackageDetail = () => {
                         </div>
                         <div className="flex-1">
                           <h3 className="font-bold text-lg mb-2">{day?.day_heading}</h3>
-                          <p className="text-muted-foreground">{day?.day_detail}</p>
+                          <p
+                            className="text-muted-foreground"
+                            dangerouslySetInnerHTML={{ __html: day?.day_detail }}
+                          ></p>
                         </div>
                       </div>
                     ))}
@@ -188,7 +191,7 @@ const PackageDetail = () => {
                     <div>
                       <h3 className="font-bold text-lg mb-4 text-green-600">✓ Included</h3>
                       <ul className="space-y-2">
-                        {pkg.included_facilities.map((item: any , index : number) => (
+                        {pkg.included_facilities.map((item: any, index: number) => (
                           <li key={index} className="flex items-start text-sm">
                             <CheckCircle className="w-4 h-4 text-green-600 mr-2 flex-shrink-0 mt-0.5" />
                             {item?.facility_name}
@@ -199,7 +202,7 @@ const PackageDetail = () => {
                     <div>
                       <h3 className="font-bold text-lg mb-4 text-red-600">✗ Excluded</h3>
                       <ul className="space-y-2">
-                        {pkg.excluded_facilities.map((item: any , index : number) => (
+                        {pkg.excluded_facilities.map((item: any, index: number) => (
                           <li key={item} className="flex items-start text-sm text-muted-foreground">
                             <span className="mr-2">•</span>
                             {item?.facility_name}
@@ -217,7 +220,7 @@ const PackageDetail = () => {
                 <CardContent className="p-6 space-y-4">
                   <div className="text-center pb-4 border-b border-border">
                     <p className="text-3xl font-bold text-primary mb-1">{getCurrencySymbol(pkg?.currency)} {pkg?.price}
-             </p>
+                    </p>
                     <p className="text-sm text-muted-foreground">{pkg?.on_basis}</p>
                   </div>
 
@@ -229,7 +232,7 @@ const PackageDetail = () => {
                     Book Now
                   </Button>
 
-                  <ContactButtons className="w-full" showLabels callLink={contactData?.call_link_1}  whatsappLink={contactData?.whatsapp_link} />
+                  <ContactButtons className="w-full" showLabels callLink={contactData?.call_link_1} whatsappLink={contactData?.whatsapp_link} />
 
                   <div className="pt-4 border-t border-border space-y-3">
                     <div className="flex items-center text-sm">
@@ -248,7 +251,7 @@ const PackageDetail = () => {
                       <CheckCircle className="w-4 h-4 text-primary mr-2" />
                       <span>Instant Confirmation</span>
                     </div>
-                       {/* {
+                    {/* {
                         pkg?.specifications.map((highlight:any , index:number)=>(
                           <>                      
                     <div className="flex items-center text-sm" key={index}>
@@ -271,7 +274,7 @@ const PackageDetail = () => {
         onClose={() => setIsBookingOpen(false)}
         itemType="package"
         itemName={pkg.tour_title}
-        itemPrice= {`${getCurrencySymbol(pkg?.currency)} ${pkg?.price} `}
+        itemPrice={`${getCurrencySymbol(pkg?.currency)} ${pkg?.price} `}
       />
     </>
   );
