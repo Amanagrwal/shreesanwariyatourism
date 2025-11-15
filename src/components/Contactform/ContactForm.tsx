@@ -12,7 +12,8 @@ import { Link } from "react-router-dom";
 const ContactForm = () => {
     const { toast } = useToast();
     const { contactData } = useGlobalContext();
-    const Iframe_link = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56952.963550627224!2d75.72138148238713!3d26.853936607414614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db500273e196d%3A0x918a37842bf2bb43!2sMansarovar%2C%20Jaipur%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1762161041853!5m2!1sen!2sin";
+    const Iframe_link = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3581.336547281624!2d75.76653807449213!3d26.15316679232042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396e61192875f92d%3A0x31eb1ea53eee7cd6!2sJASWANT%20NAGAR%20DIET%20ROAD%20TONK!5e0!3m2!1sen!2sin!4v1763015435117!5m2!1sen!2sin";
+    
     const [formData, setFormData] = useState({
         name: "",
         email: "",

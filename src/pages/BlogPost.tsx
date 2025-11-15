@@ -9,6 +9,7 @@ import SEOHead from "@/components/SEOHead";
 import ContactButtons from "@/components/ContactButtons";
 import { BASE_URL } from "@/components/Helper/Base_Url";
 import SectionLoader from "@/components/Helper/Section_loader";
+import Navbar from "@/components/Navbar";
 
 // ✅ Type definitions
 type BlogTag = {
@@ -90,6 +91,7 @@ const BlogPost: React.FC = () => {
       />
 
       <div className="min-h-screen pt-20 bg-background">
+        <Navbar/>
         {
           isLoading ? (
             <SectionLoader text="Loading single blog.."/>

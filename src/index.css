@@ -20,6 +20,9 @@ All colors MUST be HSL.
     --primary: 43 85% 45%;
     --primary-foreground: 0 0% 100%;
 
+    --slidercolor: 210 85% 15%;
+    --slidercolor-foreground: 40 40% 97%;
+
     --secondary: 220 60% 20%;
     --secondary-foreground: 0 0% 100%;
 
@@ -178,4 +181,10 @@ body > .skiptranslate {
 /* Optional: hide the small Google icon if visible */
 .goog-te-gadget-icon {
   display:inline-block;
+}
+
+.slick-dots li.slick-active div {
+  background-color:  hsl(43 85% 45% / 0.4) !important; /* Primary color */
+  width: 10px !important;
+  height: 10px !important;
 }

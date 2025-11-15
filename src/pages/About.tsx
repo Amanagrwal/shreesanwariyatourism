@@ -8,6 +8,7 @@ import Banner from "@/components/Banner/Banner";
 import Whychoose from "@/components/Whychoose/Whychoose";
 import SEOHead from "@/components/SEOHead";
 import { useGlobalContext } from "@/Contaxt/UseGlobelcontaxt";
+import Navbar from "@/components/Navbar";
 
 const About = () => {
   // ✅ 1️⃣ Fetch Function
@@ -95,6 +96,7 @@ const About = () => {
  
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
+      <Navbar/>
       <Banner banners={banners} />
      
 
@@ -182,7 +184,7 @@ const About = () => {
       </section>
 
       {/* Team Note */}
-    <Whychoose/>
+      <Whychoose/>
     </div>
     </>
   );

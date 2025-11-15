@@ -18,6 +18,7 @@ import SectionLoader from '@/components/Helper/Section_loader';
 import { BASE_URL } from '@/components/Helper/Base_Url';
 import { getCurrencySymbol } from '@/components/Helper/currencyUtils';
 import Banner from '@/components/Banner/Banner';
+import Navbar from '@/components/Navbar';
 
 const Packages = () => {
   const [selectedCity, setSelectedCity] = useState('All');
@@ -25,11 +26,9 @@ const Packages = () => {
 
   // const cities = ['all', 'Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman', 'Fujairah', 'Ras Al Khaimah'];
 
-  const { isLoading, cities, tourData = [], tourLoading, contactData , getBannerByPage} = useGlobalContext();
+  const { isLoading, cities, tourData = [], tourLoading, contactData, getBannerByPage } = useGlobalContext();
   const allCities = [{ City_id: 0, city_titile: 'All' }, ...cities || []];
   const banners = getBannerByPage("package");
-
-
 
 
 
@@ -40,14 +39,14 @@ const Packages = () => {
   return (
     <>
       <SEOHead title="Tour Packages |"
-       description="Explore our handpicked UAE tour packages covering all 7 emirates. Best prices, expert guides, and unforgettable experiences."
+        description="Explore our handpicked UAE tour packages covering all 7 emirates. Best prices, expert guides, and unforgettable experiences."
         canonical={`${BASE_URL}/packages`}
         url={`${BASE_URL}/packages`}
-       />
-   
-      <div className="min-h-screen pt-20 bg-background">
+      />
 
-      <Banner banners={banners}/>
+      <div className="min-h-screen pt-20 bg-background">
+          <Navbar/>
+        <Banner banners={banners} />
 
         {/* Hero Section */}
         <section className="gradient-section py-16">
@@ -110,9 +109,9 @@ const Packages = () => {
                         </div>
                         {
                           pkg.price && (
-                        <div className="absolute top-4 right-4 bg-white px-4 py-2 rounded-full">
-                          <span className="font-bold text-primary">{getCurrencySymbol(pkg?.currency)}{pkg.price}</span>
-                        </div>
+                            <div className="absolute top-4 right-4 bg-white px-4 py-2 rounded-full">
+                              <span className="font-bold text-primary">{pkg?.currency_display} {pkg.price}</span>
+                            </div>
 
                           )
                         }
@@ -143,7 +142,7 @@ const Packages = () => {
                           <ul className="space-y-1">
                             {pkg.specifications.slice(0, 3).map((highlight, index) => (
                               <li key={index} className="text-sm text-muted-foreground flex items-start">
-                                <div className="w-1.5 h-1.5 rounded-full bg-primary mr-2 mt-1.5 flex-shrink-0" />
+                                {/* <div className="w-1.5 h-1.5 rounded-full bg-primary mr-2 mt-1.5 flex-shrink-0" /> */}
                                 {highlight?.specification_name}
                               </li>
                             ))}
@@ -152,13 +151,23 @@ const Packages = () => {
 
                         <div className="mb-6">
                           <h4 className="font-semibold text-sm mb-2">Includes:</h4>
-                          <div className="flex flex-wrap gap-2">
+                          {/* <div className="flex flex-wrap gap-2 ">
                             {pkg.included_facilities.map((item, index) => (
                               <Badge key={index} variant="secondary" className="text-xs">
                                 {item?.facility_name}
                               </Badge>
                             ))}
+                          </div> */}
+                          <div className="flex flex-wrap gap-2">
+                            {pkg.included_facilities.slice(0, 4).map((item, index) => (
+                              <Badge key={index} variant="secondary" className="text-xs">
+                                {item?.facility_name}
+                              </Badge>
+                            ))}
                           </div>
+
+
+
                         </div>
 
                         <div className="flex gap-2">
@@ -177,7 +186,7 @@ const Packages = () => {
                             Book Now
                           </Button>
                         </div>
-                        <ContactButtons className="mt-2" callLink={contactData?.call_link_1} whatsappLink={contactData?.whatsapp_link} />
+                        <ContactButtons className="mt-2" callLink={contactData?.call_link_1 ? contactData?.call_link_1 : contactData?.call_link_2} whatsappLink={contactData?.whatsapp_link} />
                       </CardContent>
                     </Card>
                   ))}
@@ -205,20 +214,20 @@ const Packages = () => {
                 Can't find the perfect package? Let us create a personalized itinerary just for you.
                 Contact our travel experts to design your dream UAE vacation.
               </p>
-              <Button size="lg" className="gradient-hero"  onClick={() =>
-    setBookingModal({
-      isOpen: true,
-      pkg: {
-        tour_title: "Custom Package Request",
-        price: "",
-        currency: "",
-        prefillData: {
-          message: "I'm interested in creating a custom UAE tour package.",
-          travelDate: "",
-        },
-      },
-    })
-  } >
+              <Button size="lg" className="gradient-hero" onClick={() =>
+                setBookingModal({
+                  isOpen: true,
+                  pkg: {
+                    tour_title: "Custom Package Request",
+                    price: "",
+                    currency: "",
+                    prefillData: {
+                      message: "I'm interested in creating a custom UAE tour package.",
+                      travelDate: "",
+                    },
+                  },
+                })
+              } >
                 Request Custom Package
               </Button>
             </div>

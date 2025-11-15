@@ -7,8 +7,8 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   const {contactData} = useGlobalContext();
   return (
-    <footer className="bg-card border-t border-border">
-      <div className="container mx-auto px-4 py-12">
+    <footer className=" border-t border-border gradient-hero">
+      <div className="container mx-auto px-4 py-12 text-white">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* About */}
           <div>
@@ -34,10 +34,10 @@ const Footer = () => {
   {/* ✅ Brand text */}
   <div>
     <h3 className="text-lg font-bold">Shree Sanwariya Seth</h3>
-    <p className="text-xs text-muted-foreground"> World Tourism</p>
+    <p className="text-xs text-white"> World Tourism</p>
   </div>
 </div>
-            <p className="text-sm text-muted-foreground mb-4">
+            <p className="text-sm text-white mb-4">
              {contactData?.footer_description}
             </p>
 
@@ -85,7 +85,7 @@ const Footer = () => {
       <Youtube className="w-4 h-4" />
     </a>
   )}
-</div>
+    </div>
 
           </div>
 
@@ -93,25 +93,64 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              <li><Link to="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">About Us</Link></li>
-              <li><Link to="/packages" className="text-sm text-muted-foreground hover:text-primary transition-colors">Tour Packages</Link></li>
-              <li><Link to="/hotels" className="text-sm text-muted-foreground hover:text-primary transition-colors">Hotels</Link></li>
-              <li><Link to="/services" className="text-sm text-muted-foreground hover:text-primary transition-colors">Services</Link></li>
-              <li><Link to="/blog" className="text-sm text-muted-foreground hover:text-primary transition-colors">Blog</Link></li>
+              {/* <li><Link to="/about" className="text-sm text-white hover:text-primary transition-colors">About Us</Link></li> */}
+              <li><Link to="/packages" className="text-sm text-white hover:text-primary transition-colors">Tour Packages</Link></li>
+              <li><Link to="/hotels" className="text-sm text-white hover:text-primary transition-colors">Hotels</Link></li>
+              <li><Link to="/services" className="text-sm text-white hover:text-primary transition-colors">Services</Link></li>
+              <li><Link to="/blog" className="text-sm text-white hover:text-primary transition-colors">Blog</Link></li>
             </ul>
           </div>
 
           {/* UAE Cities */}
-          <div>
+          {/* <div>
+            <h4 className="font-semibold mb-4">UAE Destinations</h4>
             <h4 className="font-semibold mb-4">UAE Destinations</h4>
             <ul className="space-y-2">
-              <li><Link to="/packages?city=dubai" className="text-sm text-muted-foreground hover:text-primary transition-colors">Dubai</Link></li>
-              <li><Link to="/packages?city=abudhabi" className="text-sm text-muted-foreground hover:text-primary transition-colors">Abu Dhabi</Link></li>
-              <li><Link to="/packages?city=sharjah" className="text-sm text-muted-foreground hover:text-primary transition-colors">Sharjah</Link></li>
-              <li><Link to="/packages?city=ajman" className="text-sm text-muted-foreground hover:text-primary transition-colors">Ajman</Link></li>
-              <li><Link to="/packages?city=fujairah" className="text-sm text-muted-foreground hover:text-primary transition-colors">Fujairah</Link></li>
+              <li><Link to="/packages?city=dubai" className="text-sm text-white hover:text-primary transition-colors">Dubai</Link></li>
+              <li><Link to="/packages?city=abudhabi" className="text-sm text-white hover:text-primary transition-colors">Abu Dhabi</Link></li>
+              <li><Link to="/packages?city=sharjah" className="text-sm text-white hover:text-primary transition-colors">Sharjah</Link></li>
+              <li><Link to="/packages?city=ajman" className="text-sm text-white hover:text-primary transition-colors">Ajman</Link></li>
+              <li><Link to="/packages?city=fujairah" className="text-sm text-white hover:text-primary transition-colors">Fujairah</Link></li>
             </ul>
-          </div>
+          </div> */}
+          <div>
+  <h4 className="font-semibold mb-4">Company</h4>
+  <ul className="space-y-2">
+    <li>
+      <Link 
+        to="/about" 
+        className="text-sm text-white hover:text-primary transition-colors"
+      >
+        About Us
+      </Link>
+    </li>
+    <li>
+      <Link 
+        to="/terms-and-conditions" 
+        className="text-sm text-white hover:text-primary transition-colors"
+      >
+        Terms & Conditions
+      </Link>
+    </li>
+    <li>
+      <Link 
+        to="/privacy-policy" 
+        className="text-sm text-white hover:text-primary transition-colors"
+      >
+        Privacy Policy
+      </Link>
+    </li>
+    <li>
+      <Link 
+        to="/contact" 
+        className="text-sm text-white hover:text-primary transition-colors"
+      >
+        Contact Us
+      </Link>
+    </li>
+  </ul>
+</div>
+
 
           {/* Contact */}
           <div>
@@ -122,7 +161,7 @@ const Footer = () => {
 
                   <li className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                <span className="text-sm text-muted-foreground">{contactData?.ContactUs_Address1}</span>
+                <span className="text-sm text-white">{contactData?.ContactUs_Address1}</span>
               </li>
               )
             }
@@ -131,25 +170,40 @@ const Footer = () => {
 
                 <li className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-primary flex-shrink-0" />
-                <a href={contactData?.call_link_1} className="text-sm text-muted-foreground hover:text-primary transition-colors">{contactData?.ContactUs_Mobile_Number_1}</a>
+                <a href={contactData?.call_link_1} className="text-sm text-white hover:text-primary transition-colors">{contactData?.ContactUs_Mobile_Number_1}</a>
               </li>
               )
             }
-            {
+            {/* {
               contactData?.ContactUs_EMAIL_ID && (
 
                 <li className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-primary flex-shrink-0" />
-                <a href={`mailto:${contactData?.ContactUs_EMAIL_ID}`} className="text-sm text-muted-foreground hover:text-primary transition-colors">{contactData?.ContactUs_EMAIL_ID}</a>
+                <a href={`mailto:${contactData?.ContactUs_EMAIL_ID}`} className="text-sm text-white hover:text-primary transition-colors">{contactData?.ContactUs_EMAIL_ID}</a>
               </li>
               )
-            }
+            } */}
+
+           {
+  contactData?.ContactUs_EMAIL_ID && (
+    <li className="flex items-center space-x-3">
+      <Mail className="w-5 h-5 text-primary flex-shrink-0" />
+      <a
+        href={`mailto:${contactData?.ContactUs_EMAIL_ID}`}
+        className="text-sm text-white hover:text-primary transition-colors break-words max-w-[180px]"
+      >
+        {contactData?.ContactUs_EMAIL_ID}
+      </a>
+    </li>
+  )
+}
+ 
             </ul>
           </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-border text-center">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-white">
             © {currentYear}  Shree Sanwariya Seth All Rights Reserved | Designed & Developed by  <a
   href="https://auratechindia.com"
   target="_blank"

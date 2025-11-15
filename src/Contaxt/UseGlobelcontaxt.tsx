@@ -39,6 +39,9 @@ interface ContactUs {
   [key: string]: any;
 }
 
+interface termsAndCondition {
+ [key: string]: any;
+}
 // 🔹 Tour Type
 interface Tour {
   Tour_id: number;
@@ -78,6 +81,8 @@ interface City {
 interface GlobalContextType {
   contactData?: ContactUs;
   contactLoading: boolean;
+  termsAndCondition?: termsAndCondition;
+  termsloading : boolean;
   tourData?: Tour[];
   tourLoading: boolean;
   cities?: City[];
@@ -164,6 +169,19 @@ export const GlobalProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     staleTime: 1000 * 60 * 10, 
   });
 
+  const fetchtermsAndCondition = async () => {
+    const res = await fetch(`${BASE_URL}/termsAndCondition/`);
+    const data = await res.json();
+    return data[0];
+  };
+
+  // 🔹 React Query to handle fetching, caching, loading
+  const { data: termsAndCondition, isLoading : termsloading } = useQuery({
+    queryKey: ["termsAndCondition"],
+    queryFn: fetchtermsAndCondition,
+    staleTime: 1000 * 60 * 10, 
+  });
+
   return (
     <GlobalContext.Provider
       value={{
@@ -175,6 +193,8 @@ export const GlobalProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         isLoading , 
         banners , 
         getBannerByPage,
+        termsAndCondition,
+        termsloading,
       }}
     >
       {children}

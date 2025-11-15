@@ -8,6 +8,7 @@ import SectionLoader from "@/components/Helper/Section_loader";
 import { BASE_URL } from "@/components/Helper/Base_Url";
 import { useGlobalContext } from "@/Contaxt/UseGlobelcontaxt";
 import Banner from "@/components/Banner/Banner";
+import Navbar from "@/components/Navbar";
 
 // ✅ Helper function to safely fetch icon component dynamically
 const getIcon = (iconName: string): React.ElementType => {
@@ -22,7 +23,7 @@ const getIcon = (iconName: string): React.ElementType => {
 
 const Services = () => {
   // ✅ Fetch function for backend data
-  const {getBannerByPage} = useGlobalContext();
+  const {getBannerByPage  , contactData} = useGlobalContext();
     const banners = getBannerByPage("service");
 
   const fetchServices = async () => {
@@ -65,6 +66,7 @@ const Services = () => {
      />
 
       <div className="min-h-screen pt-20 bg-background">
+        <Navbar/>
         <Banner banners={banners}/>
         {/* 🟣 Hero Section */}
         <section className="gradient-section py-16">
@@ -225,6 +227,7 @@ const Services = () => {
               Contact our travel experts to create a personalized service package tailored to your specific needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/contact">
               <Button
                 size="lg"
                 variant="secondary"
@@ -232,6 +235,8 @@ const Services = () => {
               >
                 Contact Us Now
               </Button>
+              </Link>
+              <Link to={contactData?.call_link_1 ? contactData?.call_link_1 : contactData?.call_link_2}>   
               <Button
                 size="lg"
                 variant="secondary"
@@ -239,6 +244,7 @@ const Services = () => {
               >
                 Request Quote
               </Button>
+               </Link>
             </div>
           </div>
         </section>

@@ -10,6 +10,7 @@ import { BASE_URL } from "@/components/Helper/Base_Url";
 import SectionLoader from "@/components/Helper/Section_loader";
 import Banner from "@/components/Banner/Banner";
 import { useGlobalContext } from "@/Contaxt/UseGlobelcontaxt";
+import Navbar from "@/components/Navbar";
 
 // ✅ Blog Type Definition
 type Blog = {
@@ -94,6 +95,7 @@ const Blog: React.FC = () => {
      />
 
       <div className="min-h-screen pt-20 bg-background">
+        <Navbar/>
         <Banner banners={banners}/>
         {/* 🟣 Hero Section */}
         <section className="gradient-section py-16 text-center">

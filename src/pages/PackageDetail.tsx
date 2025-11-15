@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Calendar, MapPin, Users, Star, CheckCircle, ArrowLeft } from 'lucide-react';
+import { Calendar, MapPin, Users, Star, CheckCircle, ArrowLeft, PlusCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -14,6 +14,7 @@ import { BASE_URL } from '@/components/Helper/Base_Url';
 import SectionLoader from '@/components/Helper/Section_loader';
 import { getCurrencySymbol } from '@/components/Helper/currencyUtils';
 import { useGlobalContext } from '@/Contaxt/UseGlobelcontaxt';
+import Navbar from '@/components/Navbar';
 
 const PackageDetail = () => {
   const { slug } = useParams();
@@ -21,12 +22,7 @@ const PackageDetail = () => {
   const [loading, setLoading] = useState(true);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const { contactData } = useGlobalContext();
-  const currencySymbols: Record<string, string> = {
-    INR: '₹',
-    USD: '$',
-    EUR: '€',
-    GBP: '£',
-  };
+
 
   useEffect(() => {
     const fetchTour = async () => {
@@ -96,6 +92,7 @@ const PackageDetail = () => {
       />
 
       <div className="min-h-screen pt-20 bg-background">
+        <Navbar />
         {/* Hero Image */}
         <div className="relative h-96 overflow-hidden">
           <img src={`${BASE_URL}${pkg.banner_img}`} alt={pkg?.tour_title} className="w-full h-full object-cover" />
@@ -126,12 +123,10 @@ const PackageDetail = () => {
                 {
                   pkg?.price && (
                     <p className="text-2xl font-bold text-primary">
-                      {getCurrencySymbol(pkg?.currency)} {pkg?.price}
+                      {pkg?.currency_display} {pkg?.price}
                     </p>
-
                   )
                 }
-
                 <p className="text-xs text-muted-foreground">
                   {pkg?.on_basis}
                 </p>
@@ -152,7 +147,7 @@ const PackageDetail = () => {
                   <div className="grid md:grid-cols-2 gap-3">
                     {pkg?.specifications?.map((highlight: any, index: number) => (
                       <div key={index} className="flex items-start">
-                        <CheckCircle className="w-5 h-5 text-primary mr-2 flex-shrink-0 mt-0.5" />
+                        {/* <CheckCircle className="w-5 h-5 text-primary mr-2 flex-shrink-0 mt-0.5" /> */}
                         <span>{highlight?.specification_name}</span>
                       </div>
                     ))}
@@ -200,7 +195,12 @@ const PackageDetail = () => {
                       </ul>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg mb-4 text-red-600">✗ Excluded</h3>
+                      {/* <h3 className="font-bold text-lg mb-4 text-red-600">✗ Excluded</h3> */}
+                      <h3 className="flex items-center gap-2 font-bold text-lg mb-4 text-yellow-600">
+                        <PlusCircle className="w-5 h-5" />
+                        Optional Add-Ons
+                      </h3>
+
                       <ul className="space-y-2">
                         {pkg.excluded_facilities.map((item: any, index: number) => (
                           <li key={item} className="flex items-start text-sm text-muted-foreground">
@@ -219,7 +219,7 @@ const PackageDetail = () => {
               <Card className="sticky top-24 shadow-hover">
                 <CardContent className="p-6 space-y-4">
                   <div className="text-center pb-4 border-b border-border">
-                    <p className="text-3xl font-bold text-primary mb-1">{getCurrencySymbol(pkg?.currency)} {pkg?.price}
+                    <p className="text-3xl font-bold text-primary mb-1">{pkg?.currency_display} {pkg?.price}
                     </p>
                     <p className="text-sm text-muted-foreground">{pkg?.on_basis}</p>
                   </div>
@@ -235,7 +235,7 @@ const PackageDetail = () => {
                   <ContactButtons className="w-full" showLabels callLink={contactData?.call_link_1} whatsappLink={contactData?.whatsapp_link} />
 
                   <div className="pt-4 border-t border-border space-y-3">
-                    <div className="flex items-center text-sm">
+                    {/* <div className="flex items-center text-sm">
                       <CheckCircle className="w-4 h-4 text-primary mr-2" />
                       <span>Best Price Guarantee</span>
                     </div>
@@ -250,7 +250,12 @@ const PackageDetail = () => {
                     <div className="flex items-center text-sm">
                       <CheckCircle className="w-4 h-4 text-primary mr-2" />
                       <span>Instant Confirmation</span>
-                    </div>
+                    </div> */}
+                    <div
+                      className="text-sm space-y-2"
+                      dangerouslySetInnerHTML={{ __html: pkg?.package_info || "" }}
+                    />
+
                     {/* {
                         pkg?.specifications.map((highlight:any , index:number)=>(
                           <>                      

@@ -8,6 +8,8 @@ import { BASE_URL } from "@/components/Helper/Base_Url";
 import { useParams, Link } from "react-router-dom";
 import SectionLoader from "@/components/Helper/Section_loader";
 import ContactButtons from "@/components/ContactButtons";
+import Navbar from "@/components/Navbar";
+import { useGlobalContext } from "@/Contaxt/UseGlobelcontaxt";
 
 interface City {
   City_id: number;
@@ -18,12 +20,13 @@ interface City {
   city_description_3: string;
   city_description_4: string;
   slug?: string;
+  remark?: string; 
 }
 
 const Citydetail = () => {
   const { slug } = useParams<{ slug: string }>();
   console.log("slug:", slug);
-
+const {contactData} = useGlobalContext();
   // ✅ Fetch function
   const fetchCityDetail = async (): Promise<City | null> => {
     if (!slug) return null;
@@ -68,7 +71,8 @@ const Citydetail = () => {
         canonical={`${BASE_URL}/citydetail/${slug}`}
         url={`${BASE_URL}/citydetail/${slug}`}
       />
-
+      <div className="min-h-screen pt-20 bg-background">
+        <Navbar/>
       {/* Hero Section */}
       <div className="relative h-96 overflow-hidden">
         <img
@@ -113,12 +117,14 @@ const Citydetail = () => {
           {/* CTA Section */}
           <Card className="shadow-hover mb-12">
             <CardContent className="p-8 text-center">
-              <h3 className="text-2xl font-bold mb-4">Ready to Experience Dubai?</h3>
+              <h3 className="text-2xl font-bold mb-4">Ready to Experience {post?.city_titile}</h3>
               <p className="text-muted-foreground mb-6">
-                Let our travel experts help you plan the perfect UAE vacation.
+               { post?.remark ? post?.remark : "Let our travel experts help you plan the perfect UAE vacation."} 
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <ContactButtons showLabels />
+
+                <ContactButtons className="mt-2" callLink={contactData?.call_link_1 ? contactData?.call_link_1 : contactData?.call_link_2} whatsappLink={contactData?.whatsapp_link} showLabels />
+
                 <Link to="/packages">
                   <Button className="gradient-hero">Browse Packages</Button>
                 </Link>
@@ -126,6 +132,7 @@ const Citydetail = () => {
             </CardContent>
           </Card>
         </div>
+      </div>
       </div>
     </>
   );

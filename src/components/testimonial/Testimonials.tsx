@@ -8,6 +8,7 @@ import { BASE_URL } from '../Helper/Base_Url';
 import SectionLoader from '../Helper/Section_loader';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import GlobalSlider from '../Helper/GlobalOwlSlider';
 
 function Testimonials() {
   // ✅ Fetch Testimonials
@@ -56,30 +57,30 @@ function Testimonials() {
   };
 
   // ✅ Slick Slider Settings
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3500,
-    pauseOnHover: true,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    appendDots: (dots: any) => (
-      <div>
-        <ul className="mt-8 flex justify-center space-x-3">{dots}</ul>
-      </div>
-    ),
-    customPaging: () => (
-      <div className="w-3 h-3 rounded-full bg-gray-300 hover:bg-primary transition-all duration-300"></div>
-    ),
-    responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2 } },
-      { breakpoint: 768, settings: { slidesToShow: 1 } },
-    ],
-  };
+  // const settings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 800,
+  //   slidesToShow: 3,
+  //   slidesToScroll: 1,
+  //   autoplay: true,
+  //   autoplaySpeed: 3500,
+  //   pauseOnHover: true,
+  //   nextArrow: <NextArrow />,
+  //   prevArrow: <PrevArrow />,
+  //   appendDots: (dots: any) => (
+  //     <div>
+  //       <ul className="mt-8 flex justify-center space-x-3">{dots}</ul>
+  //     </div>
+  //   ),
+  //   customPaging: () => (
+  //     <div className="w-3 h-3 rounded-full bg-gray-300 hover:bg-primary transition-all duration-300"></div>
+  //   ),
+  //   responsive: [
+  //     { breakpoint: 1024, settings: { slidesToShow: 2 } },
+  //     { breakpoint: 768, settings: { slidesToShow: 1 } },
+  //   ],
+  // };
 
   return (
     <section className="py-20 gradient-section relative overflow-hidden">
@@ -101,7 +102,7 @@ function Testimonials() {
         {isLoading ? (
           <SectionLoader />
         ) : (
-          <Slider {...settings}>
+         <GlobalSlider>
             {testimonials.map((testimonial: any, index: number) => (
               <motion.div
                 key={testimonial.testimonial_id || index}
@@ -133,8 +134,7 @@ function Testimonials() {
                 </Card>
               </motion.div>
             ))}
-            
-          </Slider>
+           </GlobalSlider>
         )}
       </div>
     </section>

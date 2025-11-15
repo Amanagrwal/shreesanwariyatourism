@@ -10,6 +10,7 @@ import ContactButtons from "@/components/ContactButtons";
 import SEOHead from "@/components/SEOHead";
 import SectionLoader from "@/components/Helper/Section_loader";
 import { BASE_URL } from "@/components/Helper/Base_Url";
+import Navbar from "@/components/Navbar";
 
 // ✅ helper for dynamic icon
 const getIcon = (iconName: string): React.ElementType => {
@@ -63,9 +64,10 @@ const ServiceDetail = () => {
         keywords={`${service.service_title}, UAE services, Dubai ${service.service_title}`}
         canonical={`${BASE_URL}/services/${slug}`}
         url={`${BASE_URL}/services/${slug}`}
-     />
+      />
 
       <div className="min-h-screen pt-20 bg-background">
+        <Navbar />
         {/* 🟣 Hero */}
         <section className="gradient-section py-16">
           <div className="container mx-auto px-4">
@@ -118,18 +120,18 @@ const ServiceDetail = () => {
                   <div className="space-y-6">
                     {processSteps.map((step: any) => (
                       <div key={step.detail_id} className="flex gap-4">
-                         {
+                        {
                           step.detail_text && (
-                            <>                          
-                        <div className="flex-shrink-0">
-                          <div className="w-10 h-10 rounded-full gradient-hero flex items-center justify-center text-white font-bold">
-                            {step?.seq_no}
-                          </div>
-                        </div>
-                            
+                            <>
+                              <div className="flex-shrink-0">
+                                <div className="w-10 h-10 rounded-full gradient-hero flex items-center justify-center text-white font-bold">
+                                  {step?.seq_no}
+                                </div>
+                              </div>
+
                             </>
                           )
-                         }
+                        }
 
                         <div className="flex-1 pt-1">
                           <div
@@ -193,7 +195,7 @@ const ServiceDetail = () => {
                   <ContactButtons className="w-full" showLabels />
 
                   <div className="pt-4 border-t border-border space-y-3 text-sm">
-                    <p className="flex items-start">
+                    {/* <p className="flex items-start">
                       <CheckCircle className="w-4 h-4 text-primary mr-2 flex-shrink-0 mt-0.5" />
                       <span>Free consultation</span>
                     </p>
@@ -204,7 +206,12 @@ const ServiceDetail = () => {
                     <p className="flex items-start">
                       <CheckCircle className="w-4 h-4 text-primary mr-2 flex-shrink-0 mt-0.5" />
                       <span>Expert guidance</span>
-                    </p>
+                    </p> */}
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: `${service?.service_info}`,
+                      }}
+                    />
                   </div>
                 </CardContent>
               </Card>
@@ -220,9 +227,9 @@ const ServiceDetail = () => {
         itemType="service"
         itemName={service.service_title}
         prefillData={{
-            message : `I'm interested in the ${service?.service_title} service.`,
-            travelDate: '',
-      }}
+          message: `I'm interested in the ${service?.service_title} service.`,
+          travelDate: '',
+        }}
       />
     </>
   );

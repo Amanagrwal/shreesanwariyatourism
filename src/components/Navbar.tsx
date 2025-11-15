@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/button';
 import logo from '@/assets/logo.png';
 import { useGlobalContext } from '@/Contaxt/UseGlobelcontaxt';
 import BookingModal from './BookingModal';
-import GoogleTranslate from '@/languageswitcher/Google_translate';
+import { BASE_URL } from './Helper/Base_Url';
+// import GoogleTranslate from '@/languageswitcher/Google_translate';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +42,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center">
-            <img src={logo} alt="Shree Sanwariya Seth World Tourism Company" className="h-14 sm:h-16 md:h-20 lg:h-22 w-auto transition-all duration-300" />
+            <img src={`${BASE_URL}${contactData?.brand_logo}`}  alt="Shree Sanwariya Seth World Tourism Company" className="h-14 sm:h-16 md:h-20 lg:h-22 w-25 transition-all duration-300" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -62,11 +63,11 @@ const Navbar = () => {
           </div>
 
           <div className="hidden lg:flex items-center space-x-4">
-            {/* <a href={contactData?.call_link_1} className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors">
+            <a href={contactData?.call_link_1} className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors">
               <Phone className="w-5 h-5" />
               <span className="font-medium">{contactData?.ContactUs_Mobile_Number_1}</span>
-            </a> */}
-            <GoogleTranslate/>
+            </a>
+            {/* <GoogleTranslate/> */}
             <Button className="bg-primary hover:bg-primary/90"  onClick={() => setIsBookingOpen(true)} >Book Now</Button>
           </div>
         <BookingModal
@@ -107,11 +108,11 @@ const Navbar = () => {
               </Link>
             ))}
             <div className="mt-4 px-4 space-y-3">
-              {/* <a href={contactData?.call_link_1} className="flex items-center space-x-2 text-foreground">
+              <a href={contactData?.call_link_1} className="flex items-center space-x-2 text-foreground">
                 <Phone className="w-5 h-5" />
                 <span>{contactData?.ContactUs_Mobile_Number_1}</span>
-              </a> */}
-                          <GoogleTranslate/>
+              </a>
+                          {/* <GoogleTranslate/> */}
 
               <Button className="w-full bg-primary hover:bg-primary/90" onClick={() =>{ setIsBookingOpen(true) , setIsOpen(false)}}>Book Now</Button>
             </div>

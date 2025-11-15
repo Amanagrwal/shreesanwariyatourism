@@ -13,6 +13,7 @@ import Banner from '@/components/Banner/Banner';
 import ContactForm from '@/components/Contactform/ContactForm';
 import SEOHead from '@/components/SEOHead';
 import { BASE_URL } from '@/components/Helper/Base_Url';
+import Navbar from '@/components/Navbar';
 
 const Contact = () => {
   const {contactData , contactLoading , getBannerByPage} = useGlobalContext()
@@ -57,6 +58,7 @@ const banners = getBannerByPage("contact");
 />
 
     <div className="min-h-screen pt-20 bg-background">
+      <Navbar/>
 
       <Banner banners={banners} />
      

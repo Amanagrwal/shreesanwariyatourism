@@ -12,6 +12,7 @@ import { BASE_URL } from '@/components/Helper/Base_Url';
 import SectionLoader from '@/components/Helper/Section_loader';
 import { getCurrencySymbol } from '@/components/Helper/currencyUtils';
 import { useGlobalContext } from '@/Contaxt/UseGlobelcontaxt';
+import Navbar from '@/components/Navbar';
 
 const fetchHotelBySlug = async (slug: string) => {
   const res = await fetch(`${BASE_URL}/hotel/?slug=${slug}`);
@@ -54,12 +55,14 @@ const HotelDetail = () => {
     star_rating,
     total_reviews,
     price,
+    currency_display,
     currency,
     on_basis,
     thumbnail,
     banner_image,
     short_description,
     about_hotel,
+    hotel_info,
     HotelHighlights = [],
     HotelAmenitys = [],
     HotelRoomTypes = [],
@@ -69,13 +72,14 @@ const HotelDetail = () => {
     <>
       <SEOHead
         title={`${hotel_title} - ${city?.city_titile}`}
-        description={`Book ${hotel_title} in ${city?.city_titile}. ${star_rating}-star hotel with luxury amenities. Starting from ${price} ${currency} ${on_basis}.`}
+        description={`Book ${hotel_title} in ${city?.city_titile}. ${star_rating}-star hotel with luxury amenities. Starting from ${price} ${currency_display} ${on_basis}.`}
         keywords={`${city?.city_titile} hotels, ${hotel_title}, UAE accommodation, luxury hotels`}
         canonical={`${BASE_URL}/hotels/${slug}`}
         url={`${BASE_URL}/hotels/${slug}`}
       />
 
       <div className="min-h-screen pt-20 bg-background">
+        <Navbar/>
         {/* Hero Section */}
         <div className="relative h-96 overflow-hidden">
           <img
@@ -95,12 +99,12 @@ const HotelDetail = () => {
 
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
               <div>
-                <Badge className="mb-2 bg-white text-foreground">
+                {/* <Badge className="mb-2 bg-white text-foreground">
                   {'⭐'.repeat(star_rating)} {star_rating}-Star
-                </Badge>
-                <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
+                </Badge> */}
+                {/* <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
                   {hotel_title}
-                </h1>
+                </h1> */}
                 <div className="flex items-center gap-4 text-white">
                   <div className="flex items-center">
                     <MapPin className="w-5 h-5 mr-2" />
@@ -115,13 +119,18 @@ const HotelDetail = () => {
                   </div>
                 </div>
               </div>
+              {
+                price && (
               <div className="bg-white rounded-lg p-6 text-center">
                 <p className="text-sm text-muted-foreground mb-1">Starting from</p>
+                
                 <p className="text-3xl font-bold text-primary">
-                   { getCurrencySymbol(currency)} {price}
+                   {currency_display} {price}
                 </p>
                 <p className="text-xs text-muted-foreground">{on_basis}</p>
               </div>
+                )
+              }
             </div>
           </div>
         </div>
@@ -185,12 +194,17 @@ const HotelDetail = () => {
                       >
                         <div className="flex justify-between items-start mb-3">
                           <h3 className="font-bold text-lg">{room.room_name}</h3>
+                          {
+                            room.price && (
                           <div className="text-right">
                             <p className="text-2xl font-bold text-primary">
-                              {getCurrencySymbol(room?.currency)} {room.price}
+                              {room?.currency_display} {room.price}
                             </p>
                             <p className="text-xs text-muted-foreground">{room.on_basis}</p>
                           </div>
+
+                            )
+                          }
                         </div>
                         <div className="flex flex-wrap gap-2">
                           {room.RoomTypefeature?.map((feature: any, i: number) => (
@@ -210,13 +224,16 @@ const HotelDetail = () => {
             <div className="lg:col-span-1">
               <Card className="sticky top-24 shadow-hover">
                 <CardContent className="p-6 space-y-4">
+                  {
+                    price && (
                   <div className="text-center pb-4 border-b border-border">
                     <p className="text-3xl font-bold text-primary mb-1">
-                     { getCurrencySymbol(currency)} {price}
-
+                     {currency_display} {price}
                     </p>
                     <p className="text-sm text-muted-foreground">{on_basis}</p>
                   </div>
+                    )
+                  }
 
                   <Button
                     className="w-full gradient-hero btn-hover"
@@ -229,7 +246,8 @@ const HotelDetail = () => {
                   <ContactButtons className="w-full" showLabels callLink={contactData?.call_link_1}  whatsappLink={contactData?.whatsapp_link} />
 
                   <div className="pt-4 border-t border-border space-y-3">
-                    <div className="flex items-center text-sm">
+                    
+                    {/* <div className="flex items-center text-sm">
                       <CheckCircle className="w-4 h-4 text-primary mr-2" />
                       <span>Best Price Guarantee</span>
                     </div>
@@ -240,7 +258,14 @@ const HotelDetail = () => {
                     <div className="flex items-center text-sm">
                       <CheckCircle className="w-4 h-4 text-primary mr-2" />
                       <span>No Booking Fees</span>
-                    </div>
+                    </div> */}
+                    <div
+  dangerouslySetInnerHTML={{
+    __html: `${hotel_info}`,
+  }}
+/>
+
+
                   </div>
                 </CardContent>
               </Card>
@@ -255,7 +280,7 @@ const HotelDetail = () => {
         onClose={() => setIsBookingOpen(false)}
         itemType="hotel"
         itemName={hotel_title}
-        itemPrice= {`${getCurrencySymbol(currency)} ${price} `}
+        itemPrice= {`${currency_display} ${price} `}
         prefillData={{
             message : `I'm interested in the ${hotel.hotel_title} hotel.`,
             travelDate: '',

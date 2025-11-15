@@ -20,6 +20,9 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import { GlobalProvider } from "./Contaxt/UseGlobelcontaxt";
 import Citydetail from "./components/City_section/Citydetail/Citydetail";
+import FaviconUpdater from "./Faviconupdate/Faviconupdate";
+import Privacy_policy from "./components/privacy-policy/Privacy_policy";
+import Terms_and_conditions from "./components/terms-and-conditions/Terms_and_conditions";
 
 const queryClient = new QueryClient();
 
@@ -30,7 +33,8 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Navbar />
+      <FaviconUpdater/>
+          {/* <Navbar/> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -43,6 +47,8 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/terms-and-conditions" element={<Terms_and_conditions />} />
+          <Route path="/privacy-policy" element={<Privacy_policy />} />
           <Route path="/citydetail/:slug" element={< Citydetail/>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

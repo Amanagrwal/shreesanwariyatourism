@@ -13,6 +13,7 @@ import { useGlobalContext } from '@/Contaxt/UseGlobelcontaxt';
 import SectionLoader from '@/components/Helper/Section_loader';
 import { getCurrencySymbol } from '@/components/Helper/currencyUtils';
 import Banner from '@/components/Banner/Banner';
+import Navbar from '@/components/Navbar';
 
 const fetchHotels = async () => {
   const res = await fetch(`${BASE_URL}/hotel/`);
@@ -69,6 +70,7 @@ const Hotels = () => {
         url={`${BASE_URL}/hotels`}
       />
       <div className="min-h-screen pt-20 bg-background">
+        <Navbar/>
         <Banner banners={banners}/>
         {/* Hero Section */}
         <section className="gradient-section py-16">
@@ -106,7 +108,7 @@ const Hotels = () => {
               </div>
 
 
-              <div>
+              {/* <div>
                 <h3 className="text-sm font-semibold mb-3 text-center">Filter by Rating</h3>
                 <div className="flex flex-wrap justify-center gap-3">
                   {ratings.map((rating) => (
@@ -120,7 +122,7 @@ const Hotels = () => {
                     </Button>
                   ))}
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
@@ -141,9 +143,7 @@ const Hotels = () => {
                 <SectionLoader text='hotel Loading...'/>
               ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {
-
-    
+               {
                 filteredHotels.map((hotel: any) => (
                   <Card
                     key={hotel.hotel_id}
@@ -155,15 +155,20 @@ const Hotels = () => {
                         alt={hotel.hotel_title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
-                      <div className="absolute top-4 left-4">
+                      {/* <div className="absolute top-4 left-4">
                         <Badge className="bg-white text-foreground font-semibold">
                           {'⭐'.repeat(hotel.star_rating)} {hotel.star_rating}-Star
                         </Badge>
-                      </div>
+                      </div> */}
+                     {
+                      hotel.price && (
                       <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-4 py-2 rounded-full font-bold">
-                        {getCurrencySymbol(hotel?.currency)}{hotel.price}
+                        {hotel?.currency_display} {hotel.price}
                           /{hotel?.on_basis}
                       </div>
+
+                      )
+                     }
                     </div>
 
                     <CardContent className="p-6">
@@ -175,7 +180,7 @@ const Hotels = () => {
                         <Badge variant="secondary">{hotel.city?.city_titile}</Badge>
                       </div>
 
-                      <h3 className="text-xl font-bold mb-3">{hotel.hotel_title}</h3>
+                      {/* <h3 className="text-xl font-bold mb-3">{hotel.hotel_title}</h3> */}
 
                       <div className="flex items-center space-x-2 mb-4">
                         <div className="flex">

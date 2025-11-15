@@ -14,6 +14,7 @@ import {  ChevronLeft, ChevronRight } from 'lucide-react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { motion } from 'framer-motion';
+import GlobalSlider from '../Helper/GlobalOwlSlider';
 
 
 function TourPackage() {
@@ -67,30 +68,30 @@ function TourPackage() {
     );
   };
 
- const settings = {
-    dots: true,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3500,
-    pauseOnHover: true,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    appendDots: (dots: any) => (
-      <div>
-        <ul className="mt-8 flex justify-center space-x-3">{dots}</ul>
-      </div>
-    ),
-    customPaging: () => (
-      <div className="w-3 h-3 rounded-full bg-gray-300 hover:bg-primary transition-all duration-300"></div>
-    ),
-    responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2 } },
-      { breakpoint: 768, settings: { slidesToShow: 1 } },
-    ],
-  };
+//  const settings = {
+//     dots: true,
+//     infinite: true,
+//     speed: 800,
+//     slidesToShow: 3,
+//     slidesToScroll: 1,
+//     autoplay: true,
+//     autoplaySpeed: 3500,
+//     pauseOnHover: true,
+//     nextArrow: <NextArrow />,
+//     prevArrow: <PrevArrow />,
+//     appendDots: (dots: any) => (
+//       <div>
+//         <ul className="mt-8 flex justify-center space-x-3">{dots}</ul>
+//       </div>
+//     ),
+//     customPaging: () => (
+//       <div className="w-3 h-3 rounded-full bg-gray-300 hover:bg-primary transition-all duration-300"></div>
+//     ),
+//     responsive: [
+//       { breakpoint: 1024, settings: { slidesToShow: 2 } },
+//       { breakpoint: 768, settings: { slidesToShow: 1 } },
+//     ],
+//   };
   return (
     <>
      <section className="py-20 bg-background">
@@ -114,8 +115,10 @@ function TourPackage() {
   {tourLoading ? (
     <SectionLoader text="Tour Loading..." />
   ) : tourData && tourData.length > 0 ? (
-    <Slider {...settings}>
-      {tourData.map((pkg , index) => (
+    <GlobalSlider>
+
+    
+    {tourData.map((pkg , index) => (
         <div key={pkg.tour_title} className="px-3">
            <motion.div
                           key={ index}
@@ -135,7 +138,7 @@ function TourPackage() {
               {
                 pkg.price && (
               <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-4 py-2 rounded-full font-bold shadow-md">
-                    {getCurrencySymbol( pkg?.currency)}{pkg.price}
+                     {pkg?.currency_display}  {pkg.price}
               </div>
                 )
               }
@@ -155,7 +158,7 @@ function TourPackage() {
                     key={highlight?.specification_name}
                     className="text-sm flex items-center"
                   >
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary mr-2" />
+                    {/* <div className="w-1.5 h-1.5 rounded-full bg-primary mr-2" /> */}
                     {highlight?.specification_name}
                   </li>
                 ))}
@@ -197,7 +200,7 @@ function TourPackage() {
           </motion.div>
         </div>
       ))}
-    </Slider>
+    </GlobalSlider>
   ) : (
     <div className="text-center text-muted-foreground py-10">
       No tours available.

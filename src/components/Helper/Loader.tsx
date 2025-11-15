@@ -1,6 +1,10 @@
 import React from "react";
+import { BASE_URL } from "./Base_Url";
+import { useGlobalContext } from "@/Contaxt/UseGlobelcontaxt";
 
 const Loader = ({ text = "Loading...", fullHeight = true }) => {
+  const {contactData} = useGlobalContext();
+  // console.log(` logo : ${BASE_URL}${contactData?.brand_logo}`)
   return (
     <section
       className={`relative flex flex-col items-center justify-center ${
@@ -18,7 +22,9 @@ const Loader = ({ text = "Loading...", fullHeight = true }) => {
         {/* Center logo */}
         <div className="absolute inset-0 flex items-center justify-center">
           <img
-            src="/img/logo.png"
+            // src="/img/logo.png"
+            src={ contactData?.brand_logo ? `${BASE_URL}${contactData?.brand_logo}` : "/img/logo.png" }
+              
             alt="Shree Sanwariya Seth Logo"
             className="w-25 h-25 object-contain rounded-full animate-pulse drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
           />
